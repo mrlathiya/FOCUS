@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Group_7_Final_Project</string>
+    <string name="Focus">Focus</string>
+    <string name="category_list">Category List</string>
+    <string name="add_category">Add Category</string>
+    <string name="enter_task_name">Task Name</string>
+    <string name="time_duration">Time Duration</string>
+    <string name="add_task">Start Task</string>
+    <string name="add_new_category">Add New Category</string>
+</resources>

@@ -32,6 +32,8 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     private List<CategoryModelClass> categoryList;
     int hour;
     int minute;
+    int sHour;
+    int sMinute;
     String selectedDateTime;
 
     @Override
@@ -111,8 +113,8 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         Intent alarmIntent = new Intent(this, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.HOUR_OF_DAY, sHour);
+        calendar.set(Calendar.MINUTE, sMinute);
         calendar.set(Calendar.SECOND, 0);
         long alarmStartTime = calendar.getTimeInMillis();
         Log.d("","----alarmStartTime------"+alarmStartTime);
@@ -133,6 +135,8 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setSelectedTimeString(int hour, int minute) {
+        sMinute = minute;
+        sHour = hour;
         selectedDateTime = String.format(Locale.getDefault(), "%02d:%02d",  hour, minute);
         activityAddTaskBinding.timeDuration.setText(selectedDateTime);
     }

@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import com.precioso.group_7_final_project.databinding.ActivityMainBinding;
 
@@ -29,14 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         mainBinding.btnAddTask.setOnClickListener(this);
-
         recyclerView = mainBinding.rcrTasks;
         taskModelClassList = new ArrayList<>();
-
-        // Load task data onResume
         loadTaskData();
-
-        // Set up the RecyclerView
         taskAdapter = new TaskAdapter(taskModelClassList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(taskAdapter);
@@ -46,17 +40,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("MainActivity", "onResume");
         loadTaskData();
-
-        // Notify the adapter that the data set has changed
         if (taskAdapter != null) {
             taskAdapter.notifyDataSetChanged();
         }
     }
 
     private void loadTaskData() {
-        // Load tasks from SharedPreferences
         taskModelClassList = SharedPreference.getTaskList(this);
         if (taskModelClassList == null) {
             taskModelClassList = new ArrayList<>();

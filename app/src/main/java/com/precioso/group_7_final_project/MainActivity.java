@@ -1,11 +1,16 @@
 package com.precioso.group_7_final_project;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
+
 import com.precioso.group_7_final_project.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -15,7 +20,7 @@ import adapter.TaskAdapter;
 import model.TaskModelClass;
 import utils.SharedPreference;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding mainBinding;
     private TaskAdapter taskAdapter;
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnAddTask){
+        if (v.getId() == R.id.btnAddTask) {
             Intent intent = new Intent(this, AddTaskActivity.class);
             startActivity(intent);
         }

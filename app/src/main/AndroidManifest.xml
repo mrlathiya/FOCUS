@@ -4,8 +4,11 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
 
     <application
         android:allowBackup="true"
@@ -13,15 +16,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/baseTheme">
-
-
+        <activity
+            android:name=".StopActivity"
+            android:exported="false"
+            android:label="Stop Alarm Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AddEditCategory"
             android:exported="false"
             android:theme="@style/baseTheme" />
-        <receiver
+
+        <service
             android:name="broadcast.AlarmHandler"
-            android:process=":remote" />
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+
         <service
             android:name="broadcast.AlarmService"
             android:enabled="true"

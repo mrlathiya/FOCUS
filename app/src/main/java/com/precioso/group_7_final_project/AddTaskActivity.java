@@ -57,7 +57,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
         } else if (v.getId() == R.id.selectDuration) {
             timeSelect();
-        }else if (v.getId()== R.id.btnAddTaskLayout1){
+        } else if (v.getId() == R.id.btnAddTaskLayout1) {
             addTask();
         }
     }
@@ -112,14 +112,16 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent alarmIntent = new Intent(this, AlarmHandler.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, sHour);
         calendar.set(Calendar.MINUTE, sMinute);
         calendar.set(Calendar.SECOND, 0);
         long alarmStartTime = calendar.getTimeInMillis();
-        Log.d("","----alarmStartTime------"+alarmStartTime);
+        Log.d("", "----alarmStartTime------" + alarmStartTime);
 
         Objects.requireNonNull(alarmManager).set(AlarmManager.RTC_WAKEUP, alarmStartTime, pendingIntent);
+        AlarmHandler.enqueueWork(this, alarmIntent);
     }
 
 
@@ -137,7 +139,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     private void setSelectedTimeString(int hour, int minute) {
         sMinute = minute;
         sHour = hour;
-        selectedDateTime = String.format(Locale.getDefault(), "%02d:%02d",  hour, minute);
+        selectedDateTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
         activityAddTaskBinding.timeDuration.setText(selectedDateTime);
     }
 
